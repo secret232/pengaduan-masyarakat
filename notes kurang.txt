@@ -1,0 +1,7 @@
+1. di petugas ketika pengaduan masuk dan mau proses atau selesai atau pending itu data yang masuk sesuai dari inputan di view
+contoh milih proses berarti cuma fotonya aja yang masuk nda ada tanggapan, kalo pending berarti tanggapannya aja yang masuk
+sejauh ini masih namanya belum masuk ke db
+
+2. Yang tampil di tabel harus sesuai dengan yang login, yang ditolak dan selesai juga sama
+
+3. ketika mau klik selesai di pengaduan proses cuma bisa di akses oleh orang yang ngambil pekerjaan tersebut
