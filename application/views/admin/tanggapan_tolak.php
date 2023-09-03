@@ -15,6 +15,7 @@
 					<tr>
 						<th scope="col">#</th>
 						<th scope="col">Nama</th>
+						<th scope="col">Foto</th>
 						<th scope="col">Laporan</th>
 						<th scope="col">Telp</th>
 						<th scope="col">Tgl Pengaduan</th>
@@ -26,11 +27,15 @@
 						<tr>
 							<th scope="row"><?= $key + 1; ?></th>
 							<td><?= $dp['nama'] ?></td>
+							<td><img height="150" src="<?= base_url() ?>assets/uploads/<?= $dp['foto'] ?>"></td>
 							<td><?= $dp['isi_laporan'] ?></td>
 							<td><?= $dp['telp'] ?></td>
 							<td><?= $dp['tgl_pengaduan'] ?></td>
 							<td>
-								<button class="btn btn-primary" data-toggle="modal" data-target="#editModal<?= $dp['id_pengaduan'] ?>">Edit</button>
+								<?php if ($this->session->userdata('level')=='petugas') {?>
+									<button class="btn btn-primary" data-toggle="modal" data-target="#editModal<?= $dp['id_pengaduan'] ?>">Tindak Lanjut</button>
+								<?php }?>
+								
 							</td>
 						</tr>
 
@@ -39,26 +44,30 @@
 							<div class="modal-dialog" role="document">
 								<div class="modal-content">
 									<div class="modal-header">
-										<h5 class="modal-title" id="editModalLabel<?= $dp['id_pengaduan'] ?>">Edit Pengaduan</h5>
+										<h5 class="modal-title" id="editModalLabel<?= $dp['id_pengaduan'] ?>">Tindak Lanjut "<?= $dp['isi_laporan'] ?>"</h5>
 										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 											<span aria-hidden="true">&times;</span>
 										</button>
 									</div>
 									<div class="modal-body">
 										<!-- Form edit pengaduan di sini -->
-										<?= form_open('Admin/EditPengaduanController/update/' . $dp['id_pengaduan']); ?>
+										<?= form_open('Admin/TanggapanController/update_selesai/' . $dp['id_pengaduan']); ?>
 										<div class="form-group">
-											<label for="isi_laporan_edit<?= $dp['id_pengaduan'] ?>">Isi Laporan</label>
-											<textarea name="isi_laporan_edit<?= $dp['id_pengaduan'] ?>" id="isi_laporan_edit<?= $dp['id_pengaduan'] ?>" cols="30" rows="5" class="form-control"><?= $dp['isi_laporan'] ?></textarea>
+											<label for="">Tanggal Penanganan Awal</label><br>
+											<label for=""><?= date("d-m-Y", strtotime($dp['tgl_tanggapan'])); ?></label>
+											
 										</div>
 										<div class="form-group">
-											<label for="telp_edit<?= $dp['id_pengaduan'] ?>">Telp</label>
-											<input type="text" name="telp_edit<?= $dp['id_pengaduan'] ?>" id="telp_edit<?= $dp['id_pengaduan'] ?>" class="form-control" value="<?= $dp['telp'] ?>">
+											<label for="">Isi Laporan</label><br>
+											<label for=""><?= $dp['tanggapan'] ?></label>
+											
 										</div>
+										
+										
 									</div>
 									<div class="modal-footer">
 										<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-										<button type="submit" class="btn btn-primary">Update</button>
+										<button type="submit" class="btn btn-primary">Selesai</button>
 									</div>
 									<?= form_close(); ?>
 								</div>

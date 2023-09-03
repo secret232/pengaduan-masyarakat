@@ -16,6 +16,7 @@
 						<th>No</th>
 						<th>Nama</th>
 						<th>Foto</th>
+						<th>Foto Proses</th>
 						<th>Laporan</th>
 						<th>Petugas</th>
 						<th>Telp</th>
@@ -30,6 +31,7 @@
 							<td><?= $i ?></td>
 							<td><?= $dp['nama'] ?></td>
 							<td><img height="150" src="<?= base_url() ?>assets/uploads/<?= $dp['foto'] ?>"></td>
+							<td><img height="150" src="<?= base_url() ?>assets/uploads/<?= $dp['foto_tanggapan'] ?>"></td>
 							<td><?= $dp['isi_laporan'] ?></td>
 							<td><?= $dp['nama_petugas'] ?></td>
 							<td><?= $dp['telp'] ?></td>
@@ -37,7 +39,11 @@
 							<td>
 								<?= form_open('Admin/TanggapanController/tanggapan_pengaduan_selesai'); ?>
 								<input type="hidden" name="id" value="<?= $dp['id_pengaduan'] ?>">
+							<?php if ($this->session->userdata('level')=='petugas') {?>
 								<button class="btn btn-success" name="selesai">Selesai</button>
+
+							<?php }?>							
+
 								<?= form_close(); ?>
 							</td>
 						</tr>

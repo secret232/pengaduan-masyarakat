@@ -12,11 +12,17 @@
 	<div class="card mb-3 col-lg-8">
 		<div class="row no-gutters">
 			<div class="col-md-4 mt-2 ml-2">
+			<p class="card-text"> Foto Pengajuan : </p>
 				<img src="<?= base_url('assets/uploads/' . $data_pengaduan['foto']) ?>" class="card-img" alt="img user">
+			</div>
+			<div class="col-md-4 mt-2 ml-2">
+			<p class="card-text"> Foto Pengerjaan : </p>
+				<img src="<?= base_url('assets/uploads/' . $data_pengaduan['foto_tanggapan']) ?>" class="card-img" alt="no image Tanggapan">
 			</div>
 			<div class="col-md-8">
 				<div class="card-body">
 					<h5 class="card-title">Laporan : <span class="text-dark"><?= $data_pengaduan['isi_laporan'] ?></span></h5>
+					<p class="card-text">Tgl Pengaduan : <span class="text-danger"><?= $data_pengaduan['tgl_pengaduan'] ?></span></p>
 
 					<p class="card-text"> Status :
 						<?php
@@ -34,9 +40,8 @@
 						?>
 					</p>
 
-					<p class="card-text">Tanggapan : <span class="text-success"><?= $data_pengaduan['tanggapan'] ?></span></p>
-
-					<p class="card-text">Tgl Pengaduan : <span class="text-danger"><?= $data_pengaduan['tgl_pengaduan'] ?></span></p>
+					<p class="card-text">Tanggapan : <span class="text-dark"><?= $data_pengaduan['tanggapan'] ?></span></p>
+					<p class="card-text">Petugas : <span class="text-dark"><?= $data_pengaduan['nama_petugas'] ?></span></p>
 					<p class="card-text">Tgl Tanggapan : <span class="text-danger"><?= $data_pengaduan['tgl_tanggapan'] ?></span></p>
 
 

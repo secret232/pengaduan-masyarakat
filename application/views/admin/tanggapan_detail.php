@@ -31,30 +31,22 @@
   </div>
 
 
+  
+<?php if ($this->session->userdata('level')=='petugas') {?>
   <h1 class="h3 mb-4 text-gray-800">Masukan Tanggapan Anda</h1>
-
   <div class="row">
     <div class="col-lg-6">
       <?= form_open('Admin/TanggapanController/tambah_tanggapan'); ?>
       <input type="hidden" name="id" value="<?= $data_pengaduan['id_pengaduan']; ?>">
-
-      <label for="">Status Tanggapan</label>
+      <label for="status">Status Tanggapan</label>
       <div class="form-group">
-        <div class="form-check form-check-inline">
-          <input class="form-check-input" type="radio" name="status" id="status-setuju" value="proses" checked="">
-          <label class="form-check-label" for="status-setuju">Proses</label>
-        </div>
-        <div class="form-check form-check-inline">
-          <input class="form-check-input" type="radio" name="status" id="status-selesai" value="selesai">
-          <label class="form-check-label" for="status-selesai">Selesai</label>
-        </div>
-        <div class="form-check form-check-inline">
-          <input class="form-check-input" type="radio" name="status" id="status-pending" value="pending">
-          <label class="form-check-label" for="status-pending">Pending</label>
-        </div>
+        <select class="form-control" name="status" id="status">
+          <option value="proses">Proses</option>
+          <option value="selesai">Selesai</option>
+          <option value="pending">Pending</option>
+        </select>
       </div>
-
-      <div class="form-group" id="foto" style="display: none;">
+      <div class="form-group" id="foto" style="display: block;" >
         <label for="foto">Upload Foto</label>
         <div class="custom-file">
           <input type="file" class="custom-file-input" id="foto" name="foto">
@@ -72,6 +64,8 @@
       <?= form_close(); ?>
     </div>
   </div>
+  <?php }?>
+
 </div>
 
 <!-- /.container-fluid -->
@@ -79,21 +73,22 @@
 
 <script>
   document.addEventListener("DOMContentLoaded", function() {
-    const statusInput = document.querySelectorAll('input[name="status"]');
+    const statusDropdown  = document.getElementById('status');
     const uploadFoto = document.getElementById("foto");
     const tanggapan = document.getElementById("tanggapan");
 
     // Tampilkan input file ketika status yang bukan "Pending" dipilih
-    statusInput.forEach(function(input) {
-      input.addEventListener("change", function() {
-        if (this.value !== "pending") {
-          uploadFoto.style.display = "block";
-          // tanggapan.style.display = "none";
-        } else {
-          uploadFoto.style.display = "none";
-          tanggapan.style.display = "block";
-        }
-      });
-    });
+    statusDropdown.addEventListener("change", function () {
+    // Cek apakah opsi yang dipilih adalah "Pending"
+    if (statusDropdown.value === "pending") {
+      // Sembunyikan uploadFoto dan tampilkan tanggapan
+      uploadFoto.style.display = "block";
+      tanggapan.style.display = "block";
+    } else {
+      // Jika opsi yang dipilih bukan "Pending", kembalikan tampilan ke semula (jika diperlukan)
+      uploadFoto.style.display = "block";
+      tanggapan.style.display = "none";
+    }
+  });
   });
 </script>
